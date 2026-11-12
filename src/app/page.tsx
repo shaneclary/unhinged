@@ -37,7 +37,10 @@ export default function HomePage() {
                 </Link>
               </div>
             </div>
-            <StripLog steps={home.model.cycle} />
+            <div className="hero-emblem">
+              {/* The original brand artwork, stored locally rather than relying on the old site. */}
+              <img src="/unhinged-logo.jpg" alt="Unhinged Geology: a miner skull with an orange hard hat and crossed rock picks" width="1284" height="1228" fetchPriority="high" />
+            </div>
           </div>
           <div className="photo-band">
             <Photo src={home.hero.image} shape="wide" eager />
@@ -77,7 +80,7 @@ export default function HomePage() {
                 {home.model.lede.text}
               </p>
               <p>{home.model.body.text}</p>
-              <p className="cycle-line">{home.model.cycle.join(" ")}</p>
+              <StripLog steps={home.model.cycle} />
             </div>
             <Photo src={home.model.image} alt={home.model.imageAlt} shape="land" />
           </div>

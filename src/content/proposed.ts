@@ -30,10 +30,10 @@ export const builtForReview: Proposal[] = [
     needs: "A yes or no. They can be renamed in one file.",
   },
   {
-    title: "Service symbols and the strip-log graphic",
-    what: "Each service has a map-unit style swatch (Pe, Dp, Ms, St, Gm, Fl). The home page draws 'Evaluate it. Target it. Drill it. Understand it.' as a four-interval drill log.",
+    title: "Logo-led styling, service badges and the strip-log graphic",
+    what: "The original miner logo appears on the home page. Parchment, charcoal, orange, crossed-pick branding, a hard-hat favicon and six field-tool service badges carry its style across the site. The exploration cycle is shown as a four-interval drill log.",
     why: "It makes the site look like the work: map explanations and drill logs, not stock consulting graphics.",
-    needs: "Liam's eye. His logo file is needed to finish the header.",
+    needs: "Liam's eye on the visual treatment and new tool badges. The original logo was copied from the current public site; a vector master would improve future print and large-format use.",
   },
   {
     title: "A 'Learn' strip on the home page",

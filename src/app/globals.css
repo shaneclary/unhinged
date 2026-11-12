@@ -1,40 +1,31 @@
-/*
-  Unhinged Geology: design system.
-
-  The look borrows from the working documents of exploration geology:
-  the map sheet (cool paper, contour-brown linework), the map "Explanation"
-  (square unit swatches with symbols), and the drill strip log (a column of
-  intervals read from the top down). Flagging-tape orange marks actions.
-
-  Type: Barlow Condensed (western highway-sign lettering) for headings and
-  navigation, STIX Two Text (the scientific-journal face) for reading text,
-  Barlow for forms, tables and data.
-*/
+/* Unhinged Geology: parchment, charcoal and orange drawn from the original
+   miner emblem. Bold tool badges and engraved details carry the brand across
+   services, controls and exploration graphics. */
 
 :root {
-  --paper: #eef0ea;
-  --paper-shade: #e2e5db;
-  --sheet: #fafbf8;
-  --ink: #1c211d;
-  --ink-soft: #4a524b;
-  --line: #c6cabd;
-  --contour: #9a6b43;
-  --contour-ink: #7d5330;
-  --clay: #6f7f62;
-  --flag: #c2410c;
-  --flag-ink: #a8380a;
-  --flag-bright: #f26a1b;
-  --varnish: #26221e;
-  --varnish-text: #ece8df;
-  --varnish-soft: #b9b2a5;
+  --paper: #f3e3bf;
+  --paper-shade: #e7d2a6;
+  --sheet: #fcf3df;
+  --ink: #252723;
+  --ink-soft: #595447;
+  --line: #c6af83;
+  --contour: #a47943;
+  --contour-ink: #795329;
+  --clay: #716b4c;
+  --flag: #ab4308;
+  --flag-ink: #963906;
+  --flag-bright: #ff9b32;
+  --varnish: #252723;
+  --varnish-text: #f8e9c9;
+  --varnish-soft: #d0bd95;
 
   /* Map-unit colors, one per service. */
-  --u-evaluation: #c99a2e;
-  --u-drilling: #b4532a;
-  --u-mapping: #7c8b6e;
-  --u-strategy: #4f6d7a;
-  --u-modeling: #8a4f7d;
-  --u-logistics: #bfae8e;
+  --u-evaluation: #e9a135;
+  --u-drilling: #d96b19;
+  --u-mapping: #a89a69;
+  --u-strategy: #cfb16f;
+  --u-modeling: #ba8949;
+  --u-logistics: #c4b58a;
 
   --display: "Barlow Condensed", "Arial Narrow", "Helvetica Neue", Arial, sans-serif;
   --text: "STIX Two Text", "Iowan Old Style", "Palatino Linotype", Georgia, serif;
@@ -262,17 +253,14 @@ a:hover {
 }
 
 .brand-mark {
-  width: 0.8rem;
-  height: 1.7rem;
+  width: 2.7rem;
+  height: 2.7rem;
+  padding: 0.2rem;
   flex: none;
-  background: linear-gradient(
-    to bottom,
-    var(--u-evaluation) 0 25%,
-    var(--u-strategy) 25% 50%,
-    var(--u-drilling) 50% 75%,
-    var(--u-modeling) 75% 100%
-  );
-  outline: 1.5px solid var(--ink);
+  color: var(--ink);
+  background: var(--flag-bright);
+  border: 2px solid var(--ink);
+  border-radius: 50%;
 }
 
 .nav-list {
@@ -588,66 +576,26 @@ a:hover {
   }
 }
 
-/* A map-unit box: colored fill, line pattern, unit symbol. */
+/* Field-tool badges: the same bold silhouette at service and tag sizes. */
 .swatch {
-  width: 3.4rem;
-  height: 2.5rem;
+  width: 3.8rem;
+  height: 3.8rem;
   flex: none;
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  border: 1.5px solid var(--ink);
-  font-family: var(--ui);
-  font-weight: 600;
-  font-size: 1rem;
+  padding: 0.4rem;
+  border: 2px solid var(--ink);
+  border-radius: 50%;
   color: var(--ink);
-  background-color: var(--unit, var(--paper-shade));
+  background: var(--paper-shade);
+  box-shadow: inset 0 0 0 3px var(--sheet), 2px 2px 0 var(--ink);
 }
-
-.swatch span {
-  background: color-mix(in srgb, var(--sheet) 82%, transparent);
-  padding: 0 0.3rem;
-  line-height: 1.3;
-}
-
-.swatch-sm {
-  width: 2.2rem;
-  height: 1.6rem;
-  font-size: 0.78rem;
-}
-
-.sw-evaluation {
-  --unit: var(--u-evaluation);
-  background-image: radial-gradient(circle, rgb(28 33 29 / 0.55) 1px, transparent 1.4px);
-  background-size: 7px 7px;
-}
-
-.sw-drilling {
-  --unit: var(--u-drilling);
-  background-image: repeating-linear-gradient(45deg, rgb(28 33 29 / 0.5) 0 1px, transparent 1px 7px);
-}
-
-.sw-mapping {
-  --unit: var(--u-mapping);
-  background-image: repeating-linear-gradient(0deg, rgb(28 33 29 / 0.5) 0 1px, transparent 1px 6px);
-}
-
-.sw-strategy {
-  --unit: var(--u-strategy);
-  background-image:
-    repeating-linear-gradient(45deg, rgb(250 251 248 / 0.45) 0 1px, transparent 1px 8px),
-    repeating-linear-gradient(-45deg, rgb(250 251 248 / 0.45) 0 1px, transparent 1px 8px);
-}
-
-.sw-modeling {
-  --unit: var(--u-modeling);
-  background-image: repeating-linear-gradient(90deg, rgb(250 251 248 / 0.5) 0 1px, transparent 1px 6px);
-}
-
-.sw-logistics {
-  --unit: var(--u-logistics);
-  background-image: repeating-linear-gradient(-45deg, rgb(28 33 29 / 0.4) 0 1px, transparent 1px 5px);
-}
+.swatch svg { width: 100%; }
+.swatch-sm { width: 2.15rem; height: 2.15rem; padding: 0.2rem; box-shadow: inset 0 0 0 2px var(--sheet); }
+.sw-evaluation, .sw-drilling { background: var(--flag-bright); }
+.sw-mapping, .sw-strategy { background: var(--u-strategy); }
+.sw-modeling, .sw-logistics { background: var(--paper-shade); }
 
 /* ---------- Two-column blocks ---------- */
 
@@ -1596,4 +1544,50 @@ tbody td:first-child {
 
 .depth-tab[aria-current="true"] small {
   color: #c9cec4;
+}
+
+/* Brand details shared by the home page, interior pages and tools. */
+body {
+  background-image: url("/paper-grain.svg");
+}
+h1, h2 { font-weight: 700; }
+.site-header { border-bottom: 2px solid var(--ink); }
+.btn { border-color: var(--ink); box-shadow: 3px 3px 0 var(--ink); }
+.btn-line { background: var(--sheet); }
+.btn:hover { box-shadow: 1px 1px 0 var(--ink); }
+.on-dark .btn { border-color: var(--varnish-text); box-shadow: 3px 3px 0 var(--varnish-text); }
+.on-dark .btn-line { background: transparent; }
+.hero { background: radial-gradient(ellipse at 80% 30%, #edcd8e66, transparent 65%); }
+.hero-grid { align-items: center; }
+.hero-emblem { width: 100%; max-width: 29rem; justify-self: center; }
+.hero-emblem img {
+  width: 100%;
+  height: auto;
+  border: 2px solid var(--ink);
+  border-radius: 48% 48% 3px 3px;
+  box-shadow: 7px 7px 0 var(--ink);
+}
+.hero-tagline, .kicker { font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; }
+.photo { border: 2px solid var(--ink); box-shadow: 4px 4px 0 var(--paper-shade); }
+.photo-band .photo { border-bottom: 6px solid var(--flag); }
+.section-head h2::after {
+  content: "";
+  display: block;
+  width: 3rem;
+  height: 0.3rem;
+  margin-top: 1rem;
+  background: var(--flag);
+}
+.on-dark .striplog { margin-top: 1.75rem; max-width: 19rem; --ink: var(--varnish-text); }
+.on-dark .striplog text { fill: var(--varnish-text); }
+.calc, .answer, .pending { border-color: var(--ink); box-shadow: 4px 4px 0 var(--paper-shade); }
+.icon-btn, .az a { box-shadow: 2px 2px 0 var(--ink); }
+.site-footer { border-top: 4px solid var(--flag-bright); }
+@media (min-width: 60rem) {
+  .hero-grid { grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr); }
+}
+@media (max-width: 24rem) {
+  .brand { font-size: 1.15rem; letter-spacing: 0.02em; gap: 0.4rem; }
+  .brand-mark { width: 2.1rem; height: 2.1rem; }
+  .nav-mobile summary { padding-inline: 0.6rem; }
 }

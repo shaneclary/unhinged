@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { FieldIcon } from "./FieldIcon";
 import { nav, site, routes } from "@/content/site";
 
 function NavList() {
@@ -18,7 +19,7 @@ export function Header() {
     <header className="site-header">
       <div className="wrap">
         <Link href={routes.home} className="brand" aria-label={`${site.name} home`}>
-          <span className="brand-mark" aria-hidden="true" />
+          <span className="brand-mark" aria-hidden="true"><FieldIcon kind="picks" /></span>
           UNHINGED GEOLOGY
         </Link>
         <nav className="nav-desktop" aria-label="Main">
