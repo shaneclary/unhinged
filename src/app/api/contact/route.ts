@@ -36,6 +36,7 @@ export async function POST(request: Request) {
     `Phone: ${text(body.phone, 60) || "-"}`,
     `Project location: ${text(body.location, 200) || "-"}`,
     `Commodity: ${text(body.commodity, 200) || "-"}`,
+    `Requested services: ${text(body.services, 1000) || "-"}`,
     "",
     message,
   ];

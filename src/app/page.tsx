@@ -2,16 +2,42 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { home } from "@/content/legacy/home";
 import { routes, site } from "@/content/site";
-import { services } from "@/content/services";
-import { topicGroups } from "@/content/learn";
+import { serviceById, services } from "@/content/services";
+import { topicBySlug, topicGroups } from "@/content/learn";
 import { Photo } from "@/components/Photo";
-import { StripLog } from "@/components/StripLog";
-import { Swatch } from "@/components/Swatch";
+import { ExplorationPath } from "@/components/ExplorationPath";
+import { ServiceExplorer } from "@/components/ServiceExplorer";
 import { WorkWith } from "@/components/Bits";
 import { JsonLd } from "@/components/JsonLd";
 import { pageMeta, servicesLd } from "@/lib/seo";
 
 const title = `${home.hero.heading.text} | ${site.name}`;
+
+const explorerServices = services.map((service) => ({
+  id: service.id,
+  name: service.name,
+  summary: service.summary,
+  covers: service.covers,
+  image: service.image,
+  guides: service.learn.flatMap((slug) => {
+    const topic = topicBySlug(slug);
+    return topic ? [{ slug, title: topic.title }] : [];
+  }),
+}));
+
+const serviceIdsByStage = [
+  ["evaluation"],
+  ["strategy", "mapping"],
+  ["drilling", "logistics"],
+  ["modeling"],
+] as const;
+
+const explorationStages = topicGroups.map((group, index) => ({
+  stage: group.stage,
+  blurb: group.blurb,
+  services: serviceIdsByStage[index].map((id) => ({ id, name: serviceById(id).name })),
+  guides: group.topics.map((topic) => ({ slug: topic.slug, title: topic.title })),
+}));
 
 export const metadata: Metadata = {
   ...pageMeta({ title, description: site.description, path: routes.home }),
@@ -53,20 +79,7 @@ export default function HomePage() {
           <div className="section-head">
             <h2 id="services">Services</h2>
           </div>
-          <ul className="legend">
-            {services.map((service) => (
-              <li className="legend-row" key={service.id}>
-                <Swatch service={service} />
-                <div className="legend-body">
-                  <h3>
-                    <Link href={`${routes.services}#${service.id}`}>{service.name}</Link>
-                  </h3>
-                  <p>{service.summary}</p>
-                </div>
-                <Photo src={service.image} shape="thumb" />
-              </li>
-            ))}
-          </ul>
+          <ServiceExplorer services={explorerServices} />
         </div>
       </section>
 
@@ -80,7 +93,7 @@ export default function HomePage() {
                 {home.model.lede.text}
               </p>
               <p>{home.model.body.text}</p>
-              <StripLog steps={home.model.cycle} />
+              <ExplorationPath stages={explorationStages} />
             </div>
             <Photo src={home.model.image} alt={home.model.imageAlt} shape="land" />
           </div>

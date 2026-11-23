@@ -36,6 +36,12 @@ export const builtForReview: Proposal[] = [
     needs: "Liam's eye on the visual treatment and new tool badges. The original logo was copied from the current public site; a vector master would improve future print and large-format use.",
   },
   {
+    title: "Interactive service explorer and exploration path",
+    what: "The home page now lets visitors select a service to see its existing scope, related guides and project link. The firm's four existing exploration-cycle stages are also selectable as a drill-log style path. The contact form lets visitors select relevant existing services, and calculator results can be copied for a working note.",
+    why: "The interactions help a potential client find the relevant next step without inventing project facts or relying on decorative motion.",
+    needs: "Liam's review of the new interface labels and of the chosen mapping between exploration-cycle stages and services. The service descriptions and guide titles already come from the existing build.",
+  },
+  {
     title: "A 'Learn' strip on the home page",
     what: "One new band on the home page that links to the guides, under the heading 'Learn'.",
     why: "Search engines weigh links from the home page most. Without it the guides are only reachable from the menu.",

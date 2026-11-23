@@ -49,15 +49,38 @@ function Field({
 }
 
 function Results({ items }: { items: [string, string][] }) {
+  const [copyState, setCopyState] = useState("");
+  const copyLabel = copyState === "Results copied to the clipboard." ? "Copied" : copyState ? "Try copy again" : "Copy results";
+
+  async function copy() {
+    const summary = items.map(([label, value]) => `${label}: ${value}`).join("\n");
+    try {
+      await navigator.clipboard.writeText(summary);
+      setCopyState("Results copied to the clipboard.");
+    } catch {
+      setCopyState("Copy is not available in this browser.");
+    }
+  }
+
   return (
-    <dl className="results" aria-live="polite">
-      {items.map(([label, value]) => (
-        <div key={label}>
-          <dt>{label}</dt>
-          <dd>{value}</dd>
-        </div>
-      ))}
-    </dl>
+    <div className="results-group">
+      <dl className="results" aria-live="polite">
+        {items.map(([label, value]) => (
+          <div key={label}>
+            <dt>{label}</dt>
+            <dd>{value}</dd>
+          </div>
+        ))}
+      </dl>
+      <div className="results-actions">
+        <button type="button" className="result-copy" onClick={copy}>
+          {copyLabel}
+        </button>
+        <span className="sr-only" role="status">
+          {copyState}
+        </span>
+      </div>
+    </div>
   );
 }
 

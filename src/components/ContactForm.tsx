@@ -1,11 +1,18 @@
 "use client";
 
 import { useState } from "react";
+import { services } from "@/content/services";
+import { FieldIcon } from "./FieldIcon";
 
 type Status = { kind: "idle" | "sending" | "sent" | "error"; message?: string };
 
 export function ContactForm() {
   const [status, setStatus] = useState<Status>({ kind: "idle" });
+  const [selectedServices, setSelectedServices] = useState<string[]>([]);
+
+  function toggleService(name: string) {
+    setSelectedServices((selected) => (selected.includes(name) ? selected.filter((entry) => entry !== name) : [...selected, name]));
+  }
 
   async function submit(event: React.FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -20,6 +27,7 @@ export function ContactForm() {
       });
       if (response.ok) {
         form.reset();
+        setSelectedServices([]);
         setStatus({ kind: "sent", message: "Request sent. We will reply to the email address you gave." });
         return;
       }
@@ -70,6 +78,31 @@ export function ContactForm() {
           <input name="commodity" placeholder="Lithium, gold, silver" />
         </label>
       </div>
+      <fieldset className="scope-picker">
+        <legend>
+          What would you like help with? <span>Optional</span>
+        </legend>
+        <p>Select every area that applies.</p>
+        <div className="scope-choices">
+          {services.map((service) => {
+            const selected = selectedServices.includes(service.name);
+            return (
+              <button
+                key={service.id}
+                className="scope-choice"
+                data-service={service.id}
+                type="button"
+                aria-pressed={selected}
+                onClick={() => toggleService(service.name)}
+              >
+                <FieldIcon kind={service.id} />
+                <span>{service.name}</span>
+              </button>
+            );
+          })}
+        </div>
+        <input type="hidden" name="services" value={selectedServices.join(", ")} />
+      </fieldset>
       <label className="field">
         What do you need?
         <textarea name="message" required />
